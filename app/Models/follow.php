@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+class follow extends Model
+{
+    use HasFactory;
+    protected $fillable = ['id','user_follow' ,'user_follower'];
+
+    public function user(): BelongsTo {
+        return $this->belongsTo(user::class , 'user_follow');
+    }
+
+    public function mind(): BelongsTo {
+        return $this->belongsTo(user::class , 'user_follower');
+    }
+}

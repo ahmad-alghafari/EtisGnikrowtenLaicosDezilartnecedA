@@ -1,0 +1,1 @@
+<button wire:click="unfollow" class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top" title="unfollow"> <i class="bi bi-person-x"></i> </button>
