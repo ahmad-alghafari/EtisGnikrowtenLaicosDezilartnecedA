@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Activitylog\Models\Activity;
 use App\Models\share;
 use Illuminate\Http\Request;
 use DB;
@@ -59,6 +60,11 @@ class UserController extends Controller
             );
         }
 
+        activity()
+        ->by($user)
+        // ->on()
+        ->event('update')
+        ->log('test');
 
         return redirect()->back()->with(['success' => 'Updated Successfully!']);
     }

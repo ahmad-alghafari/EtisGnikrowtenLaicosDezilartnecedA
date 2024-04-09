@@ -10,11 +10,14 @@ use Illuminate\Contracts\Auth\CanResetPassword;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
+
 
 class User extends Authenticatable implements MustVerifyEmail,CanResetPassword
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable ;
+    // use LogsActivity ;
 
     /**
      * The attributes that are mass assignable.
@@ -51,6 +54,15 @@ class User extends Authenticatable implements MustVerifyEmail,CanResetPassword
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // public function getActivitylogOptions(): \Spatie\Activitylog\LogOptions{
+    //     return LogOptions::defaults()
+    //     ->logOnly(['name', 'email' , 'status' , 'role' ,'email_verified_at'])
+    //     ->useLogName('system')
+    //     ->logOnlyDirty();
+    //     // ->by();
+    //     // ->logFillable();
+    // }
 
     public function post():HasMany {
         return $this->hasMany(post::class , 'user_id','id');

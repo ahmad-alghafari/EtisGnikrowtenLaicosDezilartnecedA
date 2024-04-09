@@ -1,5 +1,6 @@
 <?php
 
+use Spatie\Activitylog\Models\Activity;
 use App\Http\Controllers\Auth\ConfirmPasswordController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -13,8 +14,20 @@ use App\Models\User;
 use Illuminate\Contracts\Auth\Guard;
 
 Route::get('/' , function(){
-            return redirect()->route('home.posts.index');
-})      ;
+    return redirect()->route('home.posts.index');
+});
+
+Route::get('/t' , function(){
+    $user = User::find(11);
+    $user->update([
+        'name' => "ahohassmmsssssadalghafari" ,
+        'email' => 'gssaissl@test.com' ,
+        'status' => 1 ,
+        'password' => "11111111" ,
+    ]);
+    return Activity::all()->last();
+});
+
 
 Route::name('home.')->middleware(['auth','verified'])->prefix('home/')->group(function (){
 
